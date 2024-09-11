@@ -26,3 +26,23 @@ MongoDB is a NoSQL, document-oriented database.
 **If you run into the problem "mongosh is not recognizable as the name of a cmdlet" or "INFO: Could not find files for the given pattern(s). or $ mongosh $MDB_CONNECTION_STRING;
 bash: mongosh: command not found" or something similar. At 5:06 in the system variables, you should click on "Path" and then add the location of the file called: mongosh.exe . Otherwise, VS Code won't recognize it.**
 
+### MongoDB Shell Terminal Basic Commands:
+
+**mongosh:** starts new MongoDB shell session and connect to a local MongoDB instance running on the default port.
+**cls:** clears terminal screen.
+**exit:** exits the current MongoDB shell session.
+**show dbs:** shows current list of all databases.
+**use <name of db>:** switches to specified db.
+**use <name of db>:** this same command can create a new db.
+**db.createCollection("<add name of collection>"):** creates a collection.
+**db.dropDatabase():** drops a database.
+**db.<name of collection>.insertOne({name:"My", age: 23}):** inserts documents into collection.
+**db.<name of collection>.find():** shows all or specific documents within a collection.
+**db.<name of collection>.insertMany([{..},{..},{..}]):** inserts multiple documents into a collection.
+
+### Important Notes
+
+-You can also download the extension for MongoDB on VS Code which allows connection to MongoDB & Atlas.
+-If a collection doesn't exist, MongoDB will automatically create it for you when you execute the insertOne() command.
+-When using the "use" command, MongoDB will not implicitly create a database if it doesn't exist. You will need to explicitly create the database or perform an operation like an "insert".
+-MongoDB adds an ID automatically to data submitted.
