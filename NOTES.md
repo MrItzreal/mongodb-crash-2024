@@ -37,8 +37,13 @@ bash: mongosh: command not found" or something similar. At 5:06 in the system va
 **db.createCollection("<add name of collection>"):** creates a collection.
 **db.dropDatabase():** drops a database.
 **db.<name of collection>.insertOne({name:"My", age: 23}):** inserts documents into collection.
-**db.<name of collection>.find():** shows all or specific documents within a collection.
+**db.<name of collection>.find():** shows all documents within a collection.
+**db.<name of collection>.find({name:"Sue"}):** shows only specified documents within a collection.
 **db.<name of collection>.insertMany([{..},{..},{..}]):** inserts multiple documents into a collection.
+**db.<name of collection>.find().sort({name:1}):** The "1" sorts through data in ascending order. Whether is alphabetically or numerically.
+**db.<name of collection>.find().sort({name:-1}):** The "-1" sorts through data in descending order. Whether is alphabetically or numerically.
+**db.<name of collection>.find().limit(1):** Retrieves only the first document from the collection.
+**db.<name of collection>.find().sort({gpa:-1}).limit(1):** Retrieves the document with the highest 'gpa' value from the collection.
 
 ### Important Notes
 
