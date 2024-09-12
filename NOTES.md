@@ -35,6 +35,7 @@ bash: mongosh: command not found" or something similar. At 5:06 in the system va
 **use <name of db>:** switches to specified db.
 **use <name of db>:** this same command can create a new db.
 **db.createCollection("<add name of collection>"):** creates a collection.
+**db.collection.drop("") & db.dropCollection(""):** both methods can drop collections.
 **db.dropDatabase():** drops a database.
 **db.<name of collection>.insertOne({name:"My", age: 23}):** inserts documents into collection.
 **db.<name of collection>.find():** shows all documents within a collection.
@@ -44,6 +45,12 @@ bash: mongosh: command not found" or something similar. At 5:06 in the system va
 **db.<name of collection>.find().sort({name:-1}):** The "-1" sorts through data in descending order. Whether is alphabetically or numerically.
 **db.<name of collection>.find().limit(1):** Retrieves only the first document from the collection.
 **db.<name of collection>.find().sort({gpa:-1}).limit(1):** Retrieves the document with the highest 'gpa' value from the collection.
+**db.<name of collection>.find({},{name:true}):** This query retrieves documents from the specified collection, but only includes specific information in this example it will only give you the name in the result.
+**db.<name of collection>.find({},{_id:false,name:true}):** This does the same thing as above but "_id:false" prevents the terminal from showing the IDs of the documents.
+
+**db.<name of collection>.updateOne({name:"Spongebob"},{$set:{fullTime:true}}):** $set operator: It's the most common update operator, used to set or update the value of a field. In this example it added fullTime status but if I wanted to change the name I could've add name:"another name" instead of fullTime:true.
+**db.<name of collection>.updateMany({name:"Spongebob"},{$set:{fullTime:true}}):** Same as above but can add more documents.
+
 
 ### Important Notes
 
@@ -51,3 +58,5 @@ bash: mongosh: command not found" or something similar. At 5:06 in the system va
 -If a collection doesn't exist, MongoDB will automatically create it for you when you execute the insertOne() command.
 -When using the "use" command, MongoDB will not implicitly create a database if it doesn't exist. You will need to explicitly create the database or perform an operation like an "insert".
 -MongoDB adds an ID automatically to data submitted.
+-.find({query},{projection}): these are two optional parameters and based on arguments you can retrieve documents from a collection. "Query" is similar to WHERE in SQL and "Projection" to SELECT in SQL. If you omit query/projection, it defaults to an empty object {}.
+-What IF you are working with a large collection and you happen to have duplicate names? Simple, each document within a collection has its own unique ID. You can "update" using the ID of the document: db.students.updateOne({_id: ObjectId('66e2faa5ff86f6acc77c9ea3')},{$set:{fullTime:false}}).
