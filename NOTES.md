@@ -47,7 +47,9 @@ MongoDB is a NoSQL, document-oriented database.
 18. **db.<name of collection>.find({},{name:true}):** This query retrieves documents from the specified collection, but only includes specific information in this example it will only give you the name in the result.
 19. **db.<name of collection>.find({},{_id:false,name:true}):** This does the same thing as above but "_id:false" prevents the terminal from showing the IDs of the documents.
 20. **db.<name of collection>.updateOne({name:"Spongebob"},{$set:{fullTime:true}}):** $set operator: It's the most common update operator, used to set or update the value of a field. In this example it added fullTime status but if I wanted to change the name I could've add name:"another name" instead of fullTime:true.
-21. **db.<name of collection>.updateMany({name:"Spongebob"},{$set:{fullTime:true}}):** Same as above but can add more documents.
+21. **db.<name of collection>.updateMany({},{$set:{fullTime:false}}):** performs a bulk update operation on a collection. Be cautious when using updateMany with an empty filter, as it will modify all documents in the collection. In this example, the specified collection will add a fullTime field to false, regardless of its previous value.
+22. **db.<name of collection>.updateOne({name:"Spongebob"},{$unset:{fullTime:""}}):** $unset operator: This operator is used to remove a field from a document. The value provided to the $unset field doesn't matter; the field will be removed regardless you use "" or true/false.
+23. **db.<name of collection>.updateMany({fullTime:{$exists: false}},{$set:{fullTime:true}}):** this query finds all collection documents that don't have a fullTime field (or have it set to null) and sets their fullTime status to true.
 
 
 ### Important Notes
