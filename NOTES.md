@@ -23,7 +23,7 @@ MongoDB is a NoSQL, document-oriented database.
 
 ### Important Note: Connecting MongoDB Shell to VS Code Terminal in Windows
 
-A. **If you run into the problem "mongosh is not recognizable as the name of a cmdlet" or "INFO: Could not find files for the given pattern(s). or $ mongosh $MDB_CONNECTION_STRING, bash: mongosh: command not found" or something similar. At 5:06 in the system variables, you should click on "Path" and then add the location of the file called: mongosh.exe . Otherwise, VS Code won't recognize it.**
+1. **If you run into the problem "mongosh is not recognizable as the name of a cmdlet" or "INFO: Could not find files for the given pattern(s). or $ mongosh $MDB_CONNECTION_STRING, bash: mongosh: command not found" or something similar. At 5:06 in the system variables, you should click on "Path" and then add the location of the file called: mongosh.exe . Otherwise, VS Code won't recognize it.**
 
 ### MongoDB Shell Terminal Basic Commands:
 
@@ -52,9 +52,9 @@ A. **If you run into the problem "mongosh is not recognizable as the name of a c
 
 ### Important Notes
 
-A. You can also download the extension for MongoDB on VS Code which allows connection to MongoDB & Atlas.
-B. If a collection doesn't exist, MongoDB will automatically create it for you when you execute the insertOne() command.
-C. When using the "use" command, MongoDB will not implicitly create a database if it doesn't exist. You will need to explicitly create the database or perform an operation like an "insert".
-D. MongoDB adds an ID automatically to data submitted.
-E. find({query},{projection}): these are two optional parameters and based on arguments you can retrieve documents from a collection. "Query" is similar to WHERE in SQL and "Projection" to SELECT in SQL. If you omit query/projection, it defaults to an empty object {}.
-F. What IF you are working with a large collection and you happen to have duplicate names? Simple, each document within a collection has its own unique ID. You can "update" using the ID of the document: db.students.updateOne({_id: ObjectId('66e2faa5ff86f6acc77c9ea3')},{$set:{fullTime:false}}).
+1. You can also download the extension for MongoDB on VS Code which allows connection to MongoDB & Atlas.
+2. If a collection doesn't exist, MongoDB will automatically create it for you when you execute the insertOne() command.
+3. When using the "use" command, MongoDB will not implicitly create a database if it doesn't exist. You will need to explicitly create the database or perform an operation like an "insert".
+4. MongoDB adds an ID automatically to data submitted.
+5. find({query},{projection}): these are two optional parameters and based on arguments you can retrieve documents from a collection. "Query" is similar to WHERE in SQL and "Projection" to SELECT in SQL. If you omit query/projection, it defaults to an empty object {}.
+6. What IF you are working with a large collection and you happen to have duplicate names? Simple, each document within a collection has its own unique ID. You can "update" using the ID of the document: db.students.updateOne({_id: ObjectId('66e2faa5ff86f6acc77c9ea3')},{$set:{fullTime:false}}).
