@@ -23,40 +23,38 @@ MongoDB is a NoSQL, document-oriented database.
 
 ### Important Note: Connecting MongoDB Shell to VS Code Terminal in Windows
 
-**If you run into the problem "mongosh is not recognizable as the name of a cmdlet" or "INFO: Could not find files for the given pattern(s). or $ mongosh $MDB_CONNECTION_STRING;
-bash: mongosh: command not found" or something similar. At 5:06 in the system variables, you should click on "Path" and then add the location of the file called: mongosh.exe . Otherwise, VS Code won't recognize it.**
+A. **If you run into the problem "mongosh is not recognizable as the name of a cmdlet" or "INFO: Could not find files for the given pattern(s). or $ mongosh $MDB_CONNECTION_STRING, bash: mongosh: command not found" or something similar. At 5:06 in the system variables, you should click on "Path" and then add the location of the file called: mongosh.exe . Otherwise, VS Code won't recognize it.**
 
 ### MongoDB Shell Terminal Basic Commands:
 
-**mongosh:** starts new MongoDB shell session and connect to a local MongoDB instance running on the default port.
-**cls:** clears terminal screen.
-**exit:** exits the current MongoDB shell session.
-**show dbs:** shows current list of all databases.
-**use <name of db>:** switches to specified db.
-**use <name of db>:** this same command can create a new db.
-**db.createCollection("<add name of collection>"):** creates a collection.
-**db.collection.drop("") & db.dropCollection(""):** both methods can drop collections.
-**db.dropDatabase():** drops a database.
-**db.<name of collection>.insertOne({name:"My", age: 23}):** inserts documents into collection.
-**db.<name of collection>.find():** shows all documents within a collection.
-**db.<name of collection>.find({name:"Sue"}):** shows only specified documents within a collection.
-**db.<name of collection>.insertMany([{..},{..},{..}]):** inserts multiple documents into a collection.
-**db.<name of collection>.find().sort({name:1}):** The "1" sorts through data in ascending order. Whether is alphabetically or numerically.
-**db.<name of collection>.find().sort({name:-1}):** The "-1" sorts through data in descending order. Whether is alphabetically or numerically.
-**db.<name of collection>.find().limit(1):** Retrieves only the first document from the collection.
-**db.<name of collection>.find().sort({gpa:-1}).limit(1):** Retrieves the document with the highest 'gpa' value from the collection.
-**db.<name of collection>.find({},{name:true}):** This query retrieves documents from the specified collection, but only includes specific information in this example it will only give you the name in the result.
-**db.<name of collection>.find({},{_id:false,name:true}):** This does the same thing as above but "_id:false" prevents the terminal from showing the IDs of the documents.
-
-**db.<name of collection>.updateOne({name:"Spongebob"},{$set:{fullTime:true}}):** $set operator: It's the most common update operator, used to set or update the value of a field. In this example it added fullTime status but if I wanted to change the name I could've add name:"another name" instead of fullTime:true.
-**db.<name of collection>.updateMany({name:"Spongebob"},{$set:{fullTime:true}}):** Same as above but can add more documents.
+1. **mongosh:** starts new MongoDB shell session and connect to a local MongoDB instance running on the default port.
+2. **cls:** clears terminal screen.
+3. **exit:** exits the current MongoDB shell session.
+4. **show dbs:** shows current list of all databases.
+5. **use <name of db>:** switches to specified db.
+6. **use <name of db>:** this same command can create a new db.
+7. **db.createCollection("<add name of collection>"):** creates a collection.
+8. **db.collection.drop("") & db.dropCollection(""):** both methods can drop collections.
+9. **db.dropDatabase():** drops a database.
+10. **db.<name of collection>.insertOne({name:"My", age: 23}):** inserts documents into collection.
+11. **db.<name of collection>.find():** shows all documents within a collection.
+12. **db.<name of collection>.find({name:"Sue"}):** shows only specified documents within a collection.
+13. **db.<name of collection>.insertMany([{..},{..},{..}]):** inserts multiple documents into a collection.
+14. **db.<name of collection>.find().sort({name:1}):** The "1" sorts through data in ascending order. Whether is alphabetically or numerically.
+15. **db.<name of collection>.find().sort({name:-1}):** The "-1" sorts through data in descending order. Whether is alphabetically or numerically.
+16. **db.<name of collection>.find().limit(1):** Retrieves only the first document from the collection.
+17. **db.<name of collection>.find().sort({gpa:-1}).limit(1):** Retrieves the document with the highest 'gpa' value from the collection.
+18. **db.<name of collection>.find({},{name:true}):** This query retrieves documents from the specified collection, but only includes specific information in this example it will only give you the name in the result.
+19. **db.<name of collection>.find({},{_id:false,name:true}):** This does the same thing as above but "_id:false" prevents the terminal from showing the IDs of the documents.
+20. **db.<name of collection>.updateOne({name:"Spongebob"},{$set:{fullTime:true}}):** $set operator: It's the most common update operator, used to set or update the value of a field. In this example it added fullTime status but if I wanted to change the name I could've add name:"another name" instead of fullTime:true.
+21. **db.<name of collection>.updateMany({name:"Spongebob"},{$set:{fullTime:true}}):** Same as above but can add more documents.
 
 
 ### Important Notes
 
--You can also download the extension for MongoDB on VS Code which allows connection to MongoDB & Atlas.
--If a collection doesn't exist, MongoDB will automatically create it for you when you execute the insertOne() command.
--When using the "use" command, MongoDB will not implicitly create a database if it doesn't exist. You will need to explicitly create the database or perform an operation like an "insert".
--MongoDB adds an ID automatically to data submitted.
--.find({query},{projection}): these are two optional parameters and based on arguments you can retrieve documents from a collection. "Query" is similar to WHERE in SQL and "Projection" to SELECT in SQL. If you omit query/projection, it defaults to an empty object {}.
--What IF you are working with a large collection and you happen to have duplicate names? Simple, each document within a collection has its own unique ID. You can "update" using the ID of the document: db.students.updateOne({_id: ObjectId('66e2faa5ff86f6acc77c9ea3')},{$set:{fullTime:false}}).
+A. You can also download the extension for MongoDB on VS Code which allows connection to MongoDB & Atlas.
+B. If a collection doesn't exist, MongoDB will automatically create it for you when you execute the insertOne() command.
+C. When using the "use" command, MongoDB will not implicitly create a database if it doesn't exist. You will need to explicitly create the database or perform an operation like an "insert".
+D. MongoDB adds an ID automatically to data submitted.
+E. find({query},{projection}): these are two optional parameters and based on arguments you can retrieve documents from a collection. "Query" is similar to WHERE in SQL and "Projection" to SELECT in SQL. If you omit query/projection, it defaults to an empty object {}.
+F. What IF you are working with a large collection and you happen to have duplicate names? Simple, each document within a collection has its own unique ID. You can "update" using the ID of the document: db.students.updateOne({_id: ObjectId('66e2faa5ff86f6acc77c9ea3')},{$set:{fullTime:false}}).
