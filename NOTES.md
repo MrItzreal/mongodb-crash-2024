@@ -45,12 +45,19 @@ MongoDB is a NoSQL, document-oriented database.
 16. **db.<name of collection>.find().limit(1):** Retrieves only the first document from the collection.
 17. **db.<name of collection>.find().sort({gpa:-1}).limit(1):** Retrieves the document with the highest 'gpa' value from the collection.
 18. **db.<name of collection>.find({},{name:true}):** This query retrieves documents from the specified collection, but only includes specific information in this example it will only give you the name in the result.
-19. **db.<name of collection>.find({},{_id:false,name:true}):** This does the same thing as above but "_id:false" prevents the terminal from showing the IDs of the documents.
+19. **db.<name of collection>.find({},{\_id:false,name:true}):** This does the same thing as above but "\_id:false" prevents the terminal from showing the IDs of the documents.
 20. **db.<name of collection>.updateOne({name:"Spongebob"},{$set:{fullTime:true}}):** $set operator: It's the most common update operator, used to set or update the value of a field. In this example it added fullTime status but if I wanted to change the name I could've add name:"another name" instead of fullTime:true.
 21. **db.<name of collection>.updateMany({},{$set:{fullTime:false}}):** performs a bulk update operation on a collection. Be cautious when using updateMany with an empty filter, as it will modify all documents in the collection. In this example, the specified collection will add a fullTime field to false, regardless of its previous value.
 22. **db.<name of collection>.updateOne({name:"Spongebob"},{$unset:{fullTime:""}}):** $unset operator: This operator is used to remove a field from a document. The value provided to the $unset field doesn't matter; the field will be removed regardless you use "" or true/false.
 23. **db.<name of collection>.updateMany({fullTime:{$exists: false}},{$set:{fullTime:true}}):** this query finds all collection documents that don't have a fullTime field (or have it set to null) and sets their fullTime status to true.
-
+24. **db.<name of collection>.deleteOne({name:"Larry"}):** Will search your specified collection for the first document where the name is "Larry" and remove it from the database.
+25. **db.<name of collection>.deleteMany({fullTime:false}):** Deletes multiple documents from a collection in a MongoDB database. It specifically targets documents that meet a certain condition.
+26. **db.<name of collection>.find({name:{$ne:"Spongebob"}}):** The "$ne" stands for not equal. This query finds all documents but excludes documents with the name "Spongebob".
+27. **db.<name of collection>.find({age:{$lt:20}}):** The "$lt" stands for less than. This query finds all documents in the collection where the "age" field is less than 20.
+28. **db.<name of collection>.find({age:{$lte:27}}):** The "$lte" stands for less than or equal. This query finds all documents in the collection where the "age" field is less or equal to 27.
+29. **db.<name of collection>.find({age:{$gt:27}}):** The "$gt" stands for greater than. This query finds all documents in the collection where the "age" field is greater than 27.
+30. **db.<name of collection>.find({age:{$gte:27}}):** The "$gte" stands for greater than or equal. This query finds all documents in the collection where the "age" field is greater or equal to 27.
+31. **db.<name of collection>.find({gpa:{$gte:3,$lte:4}}):** Finds gpa greater or equal to 3 and less than or equal to 4.
 
 ### Important Notes
 
@@ -59,4 +66,5 @@ MongoDB is a NoSQL, document-oriented database.
 3. When using the "use" command, MongoDB will not implicitly create a database if it doesn't exist. You will need to explicitly create the database or perform an operation like an "insert".
 4. MongoDB adds an ID automatically to data submitted.
 5. find({query},{projection}): these are two optional parameters and based on arguments you can retrieve documents from a collection. "Query" is similar to WHERE in SQL and "Projection" to SELECT in SQL. If you omit query/projection, it defaults to an empty object {}.
-6. What IF you are working with a large collection and you happen to have duplicate names? Simple, each document within a collection has its own unique ID. You can "update" using the ID of the document: db.students.updateOne({_id: ObjectId('66e2faa5ff86f6acc77c9ea3')},{$set:{fullTime:false}}).
+6. What IF you are working with a large collection and you happen to have duplicate names? Simple, each document within a collection has its own unique ID. You can "update" using the ID of the document: db.students.updateOne({\_id: ObjectId('66e2faa5ff86f6acc77c9ea3')},{$set:{fullTime:false}}).
+7. MongoDB Compass makes adding, deleting, importing and exporting data easier than using the Shell.
