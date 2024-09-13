@@ -58,6 +58,17 @@ MongoDB is a NoSQL, document-oriented database.
 29. **db.<name of collection>.find({age:{$gt:27}}):** The "$gt" stands for greater than. This query finds all documents in the collection where the "age" field is greater than 27.
 30. **db.<name of collection>.find({age:{$gte:27}}):** The "$gte" stands for greater than or equal. This query finds all documents in the collection where the "age" field is greater or equal to 27.
 31. **db.<name of collection>.find({gpa:{$gte:3,$lte:4}}):** Finds gpa greater or equal to 3 and less than or equal to 4.
+32. **db.<name of collection>.find({name:{$in:["Spongebob", "Patrick", "Sandy"]}}):** the $in operator is used within a query to match any of the values specified in an array.
+33. **db.<name of collection>.find({name:{$nin:["Spongebob", "Patrick", "Sandy"]}}):** The $nin operator is indeed used to exclude any of the values specified in an array from the results.
+
+### Logical Query Operators
+
+Logical operators return data based on expressions that evaluate to true or false. There are four:
+
+1. $and: Joins query clauses with a logical AND returns all documents that match the conditions of both clauses.
+2. $not: Inverts the effect of a query predicate and returns documents that do not match the query predicate.
+3. $nor: Joins query clauses with a logical NOR returns all documents that fail to match both clauses.
+4. $or: Joins query clauses with a logical OR returns all documents that match the conditions of either clause.
 
 ### Important Notes
 
