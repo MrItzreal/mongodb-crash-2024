@@ -34,7 +34,7 @@ MongoDB is a NoSQL, document-oriented database.
 5. **use <name of db>:** switches to specified db.
 6. **use <name of db>:** this same command can create a new db.
 7. **db.createCollection("<add name of collection>"):** creates a collection.
-8. **db.collection.drop("") & db.dropCollection(""):** both methods can drop collections.
+8. **db.collection.drop("") & db.dropCollection("") & db.<name of collection>.drop():** All methods can drop collections.
 9. **db.dropDatabase():** drops a database.
 10. **db.<name of collection>.insertOne({name:"My", age: 23}):** inserts documents into collection.
 11. **db.<name of collection>.find():** shows all documents within a collection.
@@ -60,6 +60,10 @@ MongoDB is a NoSQL, document-oriented database.
 31. **db.<name of collection>.find({gpa:{$gte:3,$lte:4}}):** Finds gpa greater or equal to 3 and less than or equal to 4.
 32. **db.<name of collection>.find({name:{$in:["Spongebob", "Patrick", "Sandy"]}}):** the $in operator is used within a query to match any of the values specified in an array.
 33. **db.<name of collection>.find({name:{$nin:["Spongebob", "Patrick", "Sandy"]}}):** The $nin operator is indeed used to exclude any of the values specified in an array from the results.
+34. **db.<name of collection>.find({$and:[{fullTime:true},{age:{$lte:22}}]}):** With $and you can have more than one condition it will only return a result if boths conditions are true.
+35. **db.<name of collection>.find({$or:[{fullTime:true},{age:{$lte:22}}]}):** uses the $or operator to retrieve documents where either the "fullTime" field is true OR the "age" field is less than or equal to 22. It returns a result only if at least one of these conditions is met.
+36. **db.<name of collection>.find({$nor:[{fullTime:true},{age:{$lte:22}}]}):** With $nor you can have more than one condition it will only return a result if boths conditions are false.
+37. **db.<name of collection>.find({age:{$not:{$gte:30}}}):** retrieves all documents from the "students" collection where the "age" field is less than 30. It is similar to $lt but the main difference is that $not can retrieve null values which $lt cannot.
 
 ### Logical Query Operators
 
@@ -70,12 +74,37 @@ Logical operators return data based on expressions that evaluate to true or fals
 3. $nor: Joins query clauses with a logical NOR returns all documents that fail to match both clauses.
 4. $or: Joins query clauses with a logical OR returns all documents that match the conditions of either clause.
 
+### Indexes
+
+Indexes allows for the quick lookup of a field, however, it takes up more memory and slows insert, update and remove operations. Indexes support efficient execution of queries. Without indexes, MongoDB must scan every document in a collection to return query results. If an appropriate index exists for a query, MongoDB uses the index to limit the number of documents it must scan.
+
+- To create an index: db.<name of collection>.createIndex({name: 1}) = this creates an index called: name_1. FYI, the "1" is just for decreasing/increasing order. I could've used "-1" as well.
+- To get all your Indexes: db.<name of collection>.getIndexes().
+- Once created, to retrieve your Index: db.<name of collection>.find({name:"Larry"}).explain("executionStats").
+- To drop Indexes: db.<name of collection>.dropIndex("name_1").
+- Indexes are good if you are only searching but not if you are updating.
+
+### Collections
+
+- Command to show collections: show collections.
+- db.createCollection("<add name of collection>"): creates a collection.
+- db.<name of collection>.drop(): drops a collection.
+- db.createCollection("teachers",{capped:true, size:10000000,max:100},{autoIndexId:false}):
+  1. "teachers": will be the name of the collection.
+  2. "capped:true": instructs that this collection will have a limit.
+  3. "size:10000000": sets the maximum size of the collection in bytes. In this case, it's 10 megabytes (10000000 bytes).
+  4. "max: 100": This limits the number of documents the collection can hold to 100.
+  5. "autoIndexId: false": it can be true or false. When set to false, it prevents MongoDB from automatically creating an index on the \_id field. Usually, you'd want to keep this as true unless you have a specific reason not to.
+
 ### Important Notes
 
-1. You can also download the extension for MongoDB on VS Code which allows connection to MongoDB & Atlas.
-2. If a collection doesn't exist, MongoDB will automatically create it for you when you execute the insertOne() command.
-3. When using the "use" command, MongoDB will not implicitly create a database if it doesn't exist. You will need to explicitly create the database or perform an operation like an "insert".
-4. MongoDB adds an ID automatically to data submitted.
-5. find({query},{projection}): these are two optional parameters and based on arguments you can retrieve documents from a collection. "Query" is similar to WHERE in SQL and "Projection" to SELECT in SQL. If you omit query/projection, it defaults to an empty object {}.
-6. What IF you are working with a large collection and you happen to have duplicate names? Simple, each document within a collection has its own unique ID. You can "update" using the ID of the document: db.students.updateOne({\_id: ObjectId('66e2faa5ff86f6acc77c9ea3')},{$set:{fullTime:false}}).
-7. MongoDB Compass makes adding, deleting, importing and exporting data easier than using the Shell.
+1. Document: A single record containing data in a structured format, typically represented as a JSON object.
+2. Collections: is a group of documents.
+3. Database: is a group of collections.
+4. You can also download the extension for MongoDB on VS Code which allows connection to MongoDB & Atlas.
+5. If a collection doesn't exist, MongoDB will automatically create it for you when you execute the insertOne() command.
+6. When using the "use" command, MongoDB will not implicitly create a database if it doesn't exist. You will need to explicitly create the database or perform an operation like an "insert".
+7. MongoDB adds an ID automatically to data submitted.
+8. find({query},{projection}): these are two optional parameters and based on arguments you can retrieve documents from a collection. "Query" is similar to WHERE in SQL and "Projection" to SELECT in SQL. If you omit query/projection, it defaults to an empty object {}.
+9. What IF you are working with a large collection and you happen to have duplicate names? Simple, each document within a collection has its own unique ID. You can "update" using the ID of the document: db.students.updateOne({\_id: ObjectId('66e2faa5ff86f6acc77c9ea3')},{$set:{fullTime:false}}).
+10. MongoDB Compass makes adding, deleting, importing and exporting data easier than using the Shell.
